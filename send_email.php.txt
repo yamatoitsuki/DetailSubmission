@@ -1,0 +1,25 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $to = "azrijemain@yahoo.com.sg"; // The recipient's email
+    $subject = "Transport Details Submission";
+    
+    // Collect POST data
+    $message = "Driver Name: " . $_POST['name'] . "\n" .
+               "Date: " . ($_POST['date'] ?? 'N/A') . "\n" .
+               "Time: " . ($_POST['time'] ?? 'N/A') . "\n" .
+               "Detail Name: " . ($_POST['detailName'] ?? 'N/A') . "\n" .
+               "Vehicle Type: " . ($_POST['vehicleType'] ?? 'N/A') . "\n" .
+               "Vehicle Number: " . ($_POST['vehicleNumber'] ?? 'N/A');
+
+    $headers = "From: noreply@yourdomain.com"; // Replace with a valid "From" email address
+
+    // Send email
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Email sent successfully.";
+    } else {
+        echo "Email sending failed.";
+    }
+} else {
+    echo "Invalid request.";
+}
+?>
