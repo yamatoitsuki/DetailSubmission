@@ -49,6 +49,12 @@
             }
         }
     </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // Replace YOUR_USER_ID with your actual EmailJS user ID
+        })();
+    </script>
 </head>
 <body>
     <div class="container">
@@ -59,28 +65,21 @@
 
     <div id="startDetailForm" class="form-container">
         <h3>Start Detail Form</h3>
-        <form id="startForm" action="send_email.php" method="POST">
-            <input type="hidden" name="name" id="startNameHidden">
-            <input type="hidden" name="date" id="startDateHidden">
-            <input type="hidden" name="time" id="startTimeHidden">
-            <input type="hidden" name="detailName" id="startDetailNameHidden">
-            <input type="hidden" name="vehicleType" id="startVehicleTypeHidden">
-            <input type="hidden" name="vehicleNumber" id="startVehicleNumberHidden">
-
-            <label for="startNameInput">Driver Name:</label>
-            <input type="text" id="startNameInput" required>
+        <form id="startForm">
+            <label for="startName">Driver Name:</label>
+            <input type="text" id="startName" name="name" required>
 
             <label for="startDate">Date Start:</label>
-            <input type="date" id="startDate" required>
+            <input type="date" id="startDate" name="date" required>
 
             <label for="startTime">Time Start:</label>
-            <input type="time" id="startTime" required>
+            <input type="time" id="startTime" name="time" required>
 
             <label for="startDetailName">Detail Name:</label>
-            <input type="text" id="startDetailName" required>
+            <input type="text" id="startDetailName" name="detailName" required>
 
             <label for="startVehicleType">Vehicle Type:</label>
-            <select id="startVehicleType" required>
+            <select id="startVehicleType" name="vehicleType" required>
                 <option value="5-Ton">5-Ton</option>
                 <option value="6-Ton">6-Ton</option>
                 <option value="OUV">OUV</option>
@@ -90,7 +89,7 @@
             </select>
 
             <label for="startVehicleNumber">Vehicle No.:</label>
-            <input type="text" id="startVehicleNumber" required>
+            <input type="text" id="startVehicleNumber" name="vehicleNumber" required>
 
             <button type="submit">Submit</button>
         </form>
@@ -98,28 +97,21 @@
 
     <div id="endDetailForm" class="form-container">
         <h3>End Detail Form</h3>
-        <form id="endForm" action="send_email.php" method="POST">
-            <input type="hidden" name="name" id="endNameHidden">
-            <input type="hidden" name="date" id="endDateHidden">
-            <input type="hidden" name="time" id="endTimeHidden">
-            <input type="hidden" name="detailName" id="endDetailNameHidden">
-            <input type="hidden" name="vehicleType" id="endVehicleTypeHidden">
-            <input type="hidden" name="vehicleNumber" id="endVehicleNumberHidden">
-
-            <label for="endNameInput">Driver Name:</label>
-            <input type="text" id="endNameInput" required>
+        <form id="endForm">
+            <label for="endName">Driver Name:</label>
+            <input type="text" id="endName" name="name" required>
 
             <label for="endDate">Date End:</label>
-            <input type="date" id="endDate" required>
+            <input type="date" id="endDate" name="date" required>
 
             <label for="endTime">Time End:</label>
-            <input type="time" id="endTime" required>
+            <input type="time" id="endTime" name="time" required>
 
             <label for="endDetailName">Detail Name:</label>
-            <input type="text" id="endDetailName" required>
+            <input type="text" id="endDetailName" name="detailName" required>
 
             <label for="endVehicleType">Vehicle Type:</label>
-            <select id="endVehicleType" required>
+            <select id="endVehicleType" name="vehicleType" required>
                 <option value="5-Ton">5-Ton</option>
                 <option value="6-Ton">6-Ton</option>
                 <option value="OUV">OUV</option>
@@ -129,7 +121,7 @@
             </select>
 
             <label for="endVehicleNumber">Vehicle No.:</label>
-            <input type="text" id="endVehicleNumber" required>
+            <input type="text" id="endVehicleNumber" name="vehicleNumber" required>
 
             <button type="submit">Submit</button>
         </form>
@@ -142,34 +134,50 @@
             document.getElementById(formId).style.display = 'block';
         }
 
+        // Start form submission
         document.getElementById('startForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default behavior
+            event.preventDefault();
+            
+            const startDetails = {
+                name: document.getElementById('startName').value,
+                dateStart: document.getElementById('startDate').value,
+                timeStart: document.getElementById('startTime').value,
+                detailName: document.getElementById('startDetailName').value,
+                vehicleType: document.getElementById('startVehicleType').value,
+                vehicleNumber: document.getElementById('startVehicleNumber').value
+            };
 
-            // Collect values and set them to hidden inputs
-            document.getElementById('startNameHidden').value = document.getElementById('startNameInput').value;
-            document.getElementById('startDateHidden').value = document.getElementById('startDate').value;
-            document.getElementById('startTimeHidden').value = document.getElementById('startTime').value;
-            document.getElementById('startDetailNameHidden').value = document.getElementById('startDetailName').value;
-            document.getElementById('startVehicleTypeHidden').value = document.getElementById('startVehicleType').value;
-            document.getElementById('startVehicleNumberHidden').value = document.getElementById('startVehicleNumber').value;
-
-            // Now the form will automatically send data since we're calling .submit()
-            this.submit();
+            emailjs.send("service_1uxfun2", "template_0jcl60d", startDetails)
+                .then(function(response) {
+                    console.log("Start Detail Submitted:", startDetails);
+                    alert("Start Detail submitted successfully!");
+                    document.getElementById('startForm').reset();
+                }, function(error) {
+                    console.log("Error sending email:", error);
+                });
         });
 
+        // End form submission
         document.getElementById('endForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default behavior
+            event.preventDefault();
+            
+            const endDetails = {
+                name: document.getElementById('endName').value,
+                dateEnd: document.getElementById('endDate').value,
+                timeEnd: document.getElementById('endTime').value,
+                detailName: document.getElementById('endDetailName').value,
+                vehicleType: document.getElementById('endVehicleType').value,
+                vehicleNumber: document.getElementById('endVehicleNumber').value
+            };
 
-            // Collect values and set them to hidden inputs
-            document.getElementById('endNameHidden').value = document.getElementById('endNameInput').value;
-            document.getElementById('endDateHidden').value = document.getElementById('endDate').value;
-            document.getElementById('endTimeHidden').value = document.getElementById('endTime').value;
-            document.getElementById('endDetailNameHidden').value = document.getElementById('endDetailName').value;
-            document.getElementById('endVehicleTypeHidden').value = document.getElementById('endVehicleType').value;
-            document.getElementById('endVehicleNumberHidden').value = document.getElementById('endVehicleNumber').value;
-
-            // Now the form will automatically send data since we're calling .submit()
-            this.submit();
+            emailjs.send("service_1uxfun2", "template_0jcl60d", endDetails)
+                .then(function(response) {
+                    console.log("End Detail Submitted:", endDetails);
+                    alert("End Detail submitted successfully!");
+                    document.getElementById('endForm').reset();
+                }, function(error) {
+                    console.log("Error sending email:", error);
+                });
         });
     </script>
 </body>
