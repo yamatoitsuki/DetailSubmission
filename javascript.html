@@ -1,0 +1,46 @@
+document.getElementById('startForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const startDetails = {
+        name: document.getElementById('startName').value,
+        dateStart: document.getElementById('startDate').value,
+        timeStart: document.getElementById('startTime').value,
+        detailName: document.getElementById('startDetailName').value,
+        vehicleType: document.getElementById('startVehicleType').value,
+        vehicleNumber: document.getElementById('startVehicleNumber').value
+    };
+
+    emailjs.send("service_1uxfun2", "template_swfaj99", startDetails)
+        .then(function(response) {
+            console.log("Success:", response);
+            alert("Start Detail submitted successfully!");
+            document.getElementById('startForm').reset();
+        }, function(error) {
+            console.log("Error:", error);
+            alert("Failed to send email. Please try again.");
+        });
+});
+
+document.getElementById('endForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const endDetails = {
+        name: document.getElementById('endName').value,
+        dateEnd: document.getElementById('endDate').value,
+        timeEnd: document.getElementById('endTime').value,
+        detailName: document.getElementById('endDetailName').value,
+        vehicleType: document.getElementById('endVehicleType').value,
+        vehicleNumber: document.getElementById('endVehicleNumber').value
+    };
+
+    emailjs.send("service_1uxfun2", "template_swfaj99", endDetails)
+        .then(function(response) {
+            console.log("Success:", response);
+            alert("End Detail submitted successfully!");
+            document.getElementById('endForm').reset();
+        }, function(error) {
+            console.log("Error:", error);
+            alert("Failed to send email. Please try again.");
+        });
+});
+</script>
