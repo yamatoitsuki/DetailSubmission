@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Details Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        label, input, select, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            background: #25D366; /* WhatsApp Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #128C7E;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Driver Details Form</h2>
+        <form id="whatsappForm">
+            <label for="name">Driver Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="dateStart">Date Start:</label>
+            <input type="date" id="dateStart" required>
+
+            <label for="timeStart">Time Start:</label>
+            <input type="time" id="timeStart" required>
+
+            <label for="detailName">Detail Name:</label>
+            <input type="text" id="detailName" required>
+
+            <label for="vehicleType">Vehicle Type:</label>
+            <select id="vehicleType" required>
+                <option value="5-Ton">5-Ton</option>
+                <option value="6-Ton">6-Ton</option>
+                <option value="OUV">OUV</option>
+                <option value="SOUV">SOUV</option>
+                <option value="AGILIS">AGILIS</option>
+                <option value="GP Car">GP Car</option>
+            </select>
+
+            <label for="vehicleNumber">Vehicle No.:</label>
+            <input type="text" id="vehicleNumber" required>
+
+            <button type="submit">Send to WhatsApp</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents page reload
+
+            // Collect form data
+            let name = document.getElementById('name').value;
+            let dateStart = document.getElementById('dateStart').value;
+            let timeStart = document.getElementById('timeStart').value;
+            let detailName = document.getElementById('detailName').value;
+            let vehicleType = document.getElementById('vehicleType').value;
+            let vehicleNumber = document.getElementById('vehicleNumber').value;
+
+            // Format the WhatsApp message
+            let message = `Driver Details:\n\n🚛 *Driver Name:* ${name}\n📅 *Date Start:* ${dateStart}\n⏰ *Time Start:* ${timeStart}\n📋 *Detail Name:* ${detailName}\n🚗 *Vehicle Type:* ${vehicleType}\n🔢 *Vehicle No.:* ${vehicleNumber}`;
+
+            // WhatsApp API link
+            let whatsappURL = `https://wa.me/6591865677?text=${encodeURIComponent(message)}`;
+
+            // Redirect to WhatsApp
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
+
+</body>
+</html>
