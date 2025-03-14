@@ -120,15 +120,12 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-    
-<script type="text/javascript">
-    (function() {
-        emailjs.send("service_1uxfun2","template_swfaj99",{
-email: "azrijemain@yahoo.com.sg",
-});
-</script>
 
-    <script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("aKgp8STb7vqlZfAaw"); // Initialize EmailJS with your user ID
+        })();
+
         function showForm(formId) {
             document.getElementById('startDetailForm').style.display = 'none';
             document.getElementById('endDetailForm').style.display = 'none';
@@ -137,7 +134,7 @@ email: "azrijemain@yahoo.com.sg",
 
         document.getElementById('startForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
             const startDetails = {
                 name: document.getElementById('startName').value,
                 dateStart: document.getElementById('startDate').value,
@@ -147,14 +144,20 @@ email: "azrijemain@yahoo.com.sg",
                 vehicleNumber: document.getElementById('startVehicleNumber').value
             };
 
-            console.log("Start Detail Submitted:", startDetails);
-            alert("Start Detail submitted successfully!");
-            this.reset();
+            emailjs.send("service_1uxfun2", "template_swfaj99", startDetails)
+                .then(function(response) {
+                    console.log("Success:", response);
+                    alert("Start Detail submitted successfully!");
+                    document.getElementById('startForm').reset();
+                }, function(error) {
+                    console.log("Error:", error);
+                    alert("Failed to send email. Please try again.");
+                });
         });
 
         document.getElementById('endForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
             const endDetails = {
                 name: document.getElementById('endName').value,
                 dateEnd: document.getElementById('endDate').value,
@@ -164,18 +167,16 @@ email: "azrijemain@yahoo.com.sg",
                 vehicleNumber: document.getElementById('endVehicleNumber').value
             };
 
-            console.log("End Detail Submitted:", endDetails);
-            alert("End Detail submitted successfully!");
-            this.reset();
+            emailjs.send("service_1uxfun2", "template_swfaj99", endDetails)
+                .then(function(response) {
+                    console.log("Success:", response);
+                    alert("End Detail submitted successfully!");
+                    document.getElementById('endForm').reset();
+                }, function(error) {
+                    console.log("Error:", error);
+                    alert("Failed to send email. Please try again.");
+                });
         });
     </script>
-
-    <script type="text/javascript">
-    (function() {
-        emailjs.send("service_1uxfun2","template_swfaj99",{
-email: "azrijemain@yahoo.com.sg",
-});
-</script>
-    
 </body>
 </html>
