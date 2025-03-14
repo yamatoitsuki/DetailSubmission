@@ -1,0 +1,43 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect the form data
+    $startName = $_POST['startName'];
+    $startDate = $_POST['startDate'];
+    $startTime = $_POST['startTime'];
+    $startDetailName = $_POST['startDetailName'];
+    $startVehicleType = $_POST['startVehicleType'];
+    $startVehicleNumber = $_POST['startVehicleNumber'];
+
+    $endName = $_POST['endName'];
+    $endDate = $_POST['endDate'];
+    $endTime = $_POST['endTime'];
+    $endDetailName = $_POST['endDetailName'];
+    $endVehicleType = $_POST['endVehicleType'];
+    $endVehicleNumber = $_POST['endVehicleNumber'];
+
+    $subject = "Transport Operator Submission Details";
+    $message = "Start Detail:\n
+                Driver Name: $startName\n
+                Date Start: $startDate\n
+                Time Start: $startTime\n
+                Detail Name: $startDetailName\n
+                Vehicle Type: $startVehicleType\n
+                Vehicle No.: $startVehicleNumber\n\n
+                End Detail:\n
+                Driver Name: $endName\n
+                Date End: $endDate\n
+                Time End: $endTime\n
+                Detail Name: $endDetailName\n
+                Vehicle Type: $endVehicleType\n
+                Vehicle No.: $endVehicleNumber";
+
+    $headers = "From: no-reply@yourdomain.com";
+
+    // Send email
+    if (mail("azrijemain@yahoo.com.sg", $subject, $message, $headers)) {
+        echo "Form submitted successfully.";
+    } else {
+        echo "Error in submitting form.";
+    }
+}
+?>
