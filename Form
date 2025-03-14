@@ -1,1 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Operator Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+        }
+        .form-container {
+            display: none;
+            max-width: 90%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        label, input, select, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+            .form-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Transport Operator Submission</h2>
+        <button onclick="showForm('startDetailForm')">Start Detail</button>
+        <button onclick="showForm('endDetailForm')">End Detail</button>
+    </div>
+
+    <div id="startDetailForm" class="form-container">
+        <h3>Start Detail Form</h3>
+        <form id="startForm">
+            <label for="startName">Driver Name:</label>
+            <input type="text" id="startName" required>
+
+            <label for="startDate">Date Start:</label>
+            <input type="date" id="startDate" required>
+
+            <label for="startTime">Time Start:</label>
+            <input type="time" id="startTime" required>
+
+            <label for="startDetailName">Detail Name:</label>
+            <input type="text" id="startDetailName" required>
+
+            <label for="startVehicleType">Vehicle Type:</label>
+            <select id="startVehicleType" required>
+                <option value="5-Ton">5-Ton</option>
+                <option value="6-Ton">6-Ton</option>
+                <option value="OUV">OUV</option>
+                <option value="SOUV">SOUV</option>
+                <option value="AGILIS">AGILIS</option>
+                <option value="GP Car">GP Car</option>
+            </select>
+
+            <label for="startVehicleNumber">Vehicle No.:</label>
+            <input type="text" id="startVehicleNumber" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="endDetailForm" class="form-container">
+        <h3>End Detail Form</h3>
+        <form id="endForm">
+            <label for="endName">Driver Name:</label>
+            <input type="text" id="endName" required>
+
+            <label for="endDate">Date End:</label>
+            <input type="date" id="endDate" required>
+
+            <label for="endTime">Time End:</label>
+            <input type="time" id="endTime" required>
+
+            <label for="endDetailName">Detail Name:</label>
+            <input type="text" id="endDetailName" required>
+
+            <label for="endVehicleType">Vehicle Type:</label>
+            <select id="endVehicleType" required>
+                <option value="5-Ton">5-Ton</option>
+                <option value="6-Ton">6-Ton</option>
+                <option value="OUV">OUV</option>
+                <option value="SOUV">SOUV</option>
+                <option value="AGILIS">AGILIS</option>
+                <option value="GP Car">GP Car</option>
+            </select>
+
+            <label for="endVehicleNumber">Vehicle No.:</label>
+            <input type="text" id="endVehicleNumber" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            document.getElementById('startDetailForm').style.display = 'none';
+            document.getElementById('endDetailForm').style.display = 'none';
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        document.getElementById('startForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const startDetails = {
+                name: document.getElementById('startName').value,
+                dateStart: document.getElementById('startDate').value,
+                timeStart: document.getElementById('startTime').value,
+                detailName: document.getElementById('startDetailName').value,
+                vehicleType: document.getElementById('startVehicleType').value,
+                vehicleNumber: document.getElementById('startVehicleNumber').value
+            };
+
+            console.log("Start Detail Submitted:", startDetails);
+            alert("Start Detail submitted successfully!");
+            this.reset();
+        });
+
+        document.getElementById('endForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const endDetails = {
+                name: document.getElementById('endName').value,
+                dateEnd: document.getElementById('endDate').value,
+                timeEnd: document.getElementById('endTime').value,
+                detailName: document.getElementById('endDetailName').value,
+                vehicleType: document.getElementById('endVehicleType').value,
+                vehicleNumber: document.getElementById('endVehicleNumber').value
+            };
+
+            console.log("End Detail Submitted:", endDetails);
+            alert("End Detail submitted successfully!");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
 
