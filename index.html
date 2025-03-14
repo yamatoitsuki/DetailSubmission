@@ -162,68 +162,7 @@
             this.reset();
         });
     </script>
-<script>
-    // Initialize EmailJS with your user_id
-    (function() {
-        emailjs.init("aKgp8STb7vqlZfAaw");  // Replace with your EmailJS user ID
-    })();
-
-    // Function to send email
-    function sendEmail(formData, formType) {
-        const emailParams = {
-            to_email: "askboomy@gmail.com",  // Recipient email
-            from_name: formData.name,
-            from_email: formData.email || "No email provided",  // Email (if any)
-            detail_name: formData.detailName,
-            vehicle_type: formData.vehicleType,
-            vehicle_number: formData.vehicleNumber,
-            form_type: formType,  // Used to differentiate between start or end
-            date: formData.date,
-            time: formData.time,
-        };
-
-        // Send email through EmailJS
-        emailjs.send("service_1uxfun2", "template_swfaj99", emailParams)  // Replace with your service_id and template_id
-            .then((response) => {
-                alert(formType + " Detail submitted successfully!");
-            }, (error) => {
-                alert("Failed to send email. Try again later.");
-            });
-    }
-
-    // Start form submission event
-    document.getElementById('startForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const startDetails = {
-            name: document.getElementById('startName').value,
-            date: document.getElementById('startDate').value,
-            time: document.getElementById('startTime').value,
-            detailName: document.getElementById('startDetailName').value,
-            vehicleType: document.getElementById('startVehicleType').value,
-            vehicleNumber: document.getElementById('startVehicleNumber').value
-        };
-
-        sendEmail(startDetails, "Start");
-        this.reset();
-    });
-
-    // End form submission event
-    document.getElementById('endForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const endDetails = {
-            name: document.getElementById('endName').value,
-            date: document.getElementById('endDate').value,
-            time: document.getElementById('endTime').value,
-            detailName: document.getElementById('endDetailName').value,
-            vehicleType: document.getElementById('endVehicleType').value,
-            vehicleNumber: document.getElementById('endVehicleNumber').value
-        };
-
-        sendEmail(endDetails, "End");
-        this.reset();
-    });
-</script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    
 </body>
 </html>
