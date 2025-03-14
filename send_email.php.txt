@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                "Vehicle Type: " . ($_POST['vehicleType'] ?? 'N/A') . "\n" .
                "Vehicle Number: " . ($_POST['vehicleNumber'] ?? 'N/A');
 
-    $headers = "From: noreply@yourdomain.com"; // Replace with a valid "From" email address
+    $headers = "From: azrijemain@yahoo.com.sg"; // Replace with a valid "From" email address
 
     // Send email
     if (mail($to, $subject, $message, $headers)) {
