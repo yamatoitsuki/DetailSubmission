@@ -49,12 +49,6 @@
             }
         }
     </style>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        (function(){
-            emailjs.init("aKgp8STb7vqlZfAaw"); // Replace YOUR_USER_ID with your actual EmailJS user ID
-        })();
-    </script>
 </head>
 <body>
     <div class="container">
@@ -67,19 +61,19 @@
         <h3>Start Detail Form</h3>
         <form id="startForm">
             <label for="startName">Driver Name:</label>
-            <input type="text" id="startName" name="name" required>
+            <input type="text" id="startName" required>
 
             <label for="startDate">Date Start:</label>
-            <input type="date" id="startDate" name="date" required>
+            <input type="date" id="startDate" required>
 
             <label for="startTime">Time Start:</label>
-            <input type="time" id="startTime" name="time" required>
+            <input type="time" id="startTime" required>
 
             <label for="startDetailName">Detail Name:</label>
-            <input type="text" id="startDetailName" name="detailName" required>
+            <input type="text" id="startDetailName" required>
 
             <label for="startVehicleType">Vehicle Type:</label>
-            <select id="startVehicleType" name="vehicleType" required>
+            <select id="startVehicleType" required>
                 <option value="5-Ton">5-Ton</option>
                 <option value="6-Ton">6-Ton</option>
                 <option value="OUV">OUV</option>
@@ -89,9 +83,11 @@
             </select>
 
             <label for="startVehicleNumber">Vehicle No.:</label>
-            <input type="text" id="startVehicleNumber" name="vehicleNumber" required>
+            <input type="text" id="startVehicleNumber" required>
 
-            <button type="submit">Submit</button>
+            <form action="https://formsubmit.co/askboomy@gmail.com" method="POST">
+     <button type="submit">Send</button>
+</form>
         </form>
     </div>
 
@@ -99,19 +95,19 @@
         <h3>End Detail Form</h3>
         <form id="endForm">
             <label for="endName">Driver Name:</label>
-            <input type="text" id="endName" name="name" required>
+            <input type="text" id="endName" required>
 
             <label for="endDate">Date End:</label>
-            <input type="date" id="endDate" name="date" required>
+            <input type="date" id="endDate" required>
 
             <label for="endTime">Time End:</label>
-            <input type="time" id="endTime" name="time" required>
+            <input type="time" id="endTime" required>
 
             <label for="endDetailName">Detail Name:</label>
-            <input type="text" id="endDetailName" name="detailName" required>
+            <input type="text" id="endDetailName" required>
 
             <label for="endVehicleType">Vehicle Type:</label>
-            <select id="endVehicleType" name="vehicleType" required>
+            <select id="endVehicleType" required>
                 <option value="5-Ton">5-Ton</option>
                 <option value="6-Ton">6-Ton</option>
                 <option value="OUV">OUV</option>
@@ -121,7 +117,7 @@
             </select>
 
             <label for="endVehicleNumber">Vehicle No.:</label>
-            <input type="text" id="endVehicleNumber" name="vehicleNumber" required>
+            <input type="text" id="endVehicleNumber" required>
 
             <button type="submit">Submit</button>
         </form>
@@ -134,7 +130,6 @@
             document.getElementById(formId).style.display = 'block';
         }
 
-        // Start form submission
         document.getElementById('startForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -147,17 +142,11 @@
                 vehicleNumber: document.getElementById('startVehicleNumber').value
             };
 
-            emailjs.send("service_1uxfun2", "template_swfaj99", startDetails)
-                .then(function(response) {
-                    console.log("Start Detail Submitted:", startDetails);
-                    alert("Start Detail submitted successfully!");
-                    document.getElementById('startForm').reset();
-                }, function(error) {
-                    console.log("Error sending email:", error);
-                });
+            console.log("Start Detail Submitted:", startDetails);
+            alert("Start Detail submitted successfully!");
+            this.reset();
         });
 
-        // End form submission
         document.getElementById('endForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -170,14 +159,9 @@
                 vehicleNumber: document.getElementById('endVehicleNumber').value
             };
 
-            emailjs.send("service_1uxfun2", "template_swfaj99", endDetails)
-                .then(function(response) {
-                    console.log("End Detail Submitted:", endDetails);
-                    alert("End Detail submitted successfully!");
-                    document.getElementById('endForm').reset();
-                }, function(error) {
-                    console.log("Error sending email:", error);
-                });
+            console.log("End Detail Submitted:", endDetails);
+            alert("End Detail submitted successfully!");
+            this.reset();
         });
     </script>
 </body>
